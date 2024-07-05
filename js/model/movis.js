@@ -39,4 +39,30 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 6. Listar todos los géneros de películas distintos
+    async getAllDistinctGenre(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate(  [
+            { 
+              $unwind: "$genre" 
+            },
+            { 
+              $group: { 
+                _id: null, 
+                uniqueGenres: { 
+                  $addToSet: "$genre" 
+                } 
+              } 
+            },
+            { 
+              $project: { 
+                _id: 0, 
+                uniqueGenres: 1 
+              } 
+            }
+          ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
