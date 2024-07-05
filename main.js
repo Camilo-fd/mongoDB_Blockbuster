@@ -13,4 +13,5 @@ let objAuthors = new authors();
 // console.log(await objAuthors.getAllActors1980());
 // console.log(await objAuthors.getActorWithMostAwards());
 // console.log(await objAuthors.getTotalAutors());
-console.log(await objAuthors.getAverageAgeActors());
+// console.log(await objAuthors.getAverageAgeActors());
+console.log(await objAuthors.getAllActorsInstagram());
