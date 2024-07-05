@@ -118,4 +118,27 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 9. Encontrar todas las películas en las que John Doe ha actuado
+    async getAllMoviesJohnDoe(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            {
+              $unwind: "$character"
+            },
+            {
+              $match: {
+                "character.id_actor": 1
+              }
+            },
+            {
+              $project: {
+                pelicula: "$name",
+                nombre: "$character.apodo"
+              }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }

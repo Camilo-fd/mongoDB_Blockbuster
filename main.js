@@ -4,7 +4,8 @@ import { movies } from "./js/model/movis.js";
 let objMovis = new movies();
 // console.log(await objMovis.getCountDvd());
 // console.log(await objMovis.getAllDistinctGenre());
-console.log(await objMovis.getTotalCopiesDvd());
+// console.log(await objMovis.getTotalCopiesDvd());
+console.log(await objMovis.getAllMoviesJohnDoe());
 
 // let objAuthors = new authors();
 // console.log(await objAuthors.getAllActorsAwards());
