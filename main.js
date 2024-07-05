@@ -5,4 +5,5 @@ import { movies } from "./js/model/movis.js";
 // console.log(await objMovis.getCountDvd());
 
 let objAuthors = new authors();
-console.log(await objAuthors.getAllActorsAwards());
+// console.log(await objAuthors.getAllActorsAwards());
+console.log(await objAuthors.getAllCantAwardsActor());

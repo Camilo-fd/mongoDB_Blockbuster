@@ -31,4 +31,23 @@ export class authors extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 3. Encontrar la cantidad total de premios que ha ganado cada actor
+    async getAllCantAwardsActor(){
+        const collection = this.db.collection('autors');
+        const data = await collection.aggregate([
+            { 
+              $unwind: "$awards" 
+            },
+            { 
+              $group: {
+                _id: "$_id",
+                nombre: {$first: "$full_name"},
+                total_awards: { $sum: 1 }
+              }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
