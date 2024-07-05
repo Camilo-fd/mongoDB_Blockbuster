@@ -1,7 +1,7 @@
 import { authors } from "./js/model/authors.js";
 import { movies } from "./js/model/movis.js";
 
-let objMovis = new movies();
+// let objMovis = new movies();
 // console.log(await objMovis.getCountDvd());
 // console.log(await objMovis.getAllDistinctGenre());
 // console.log(await objMovis.getTotalCopiesDvd());
@@ -11,7 +11,8 @@ let objMovis = new movies();
 // console.log(await objMovis.getAllMoviesJohnDoeBluRay());
 // console.log(await objMovis.getAllMoviesScienceFictionIdActor3());
 // console.log(await objMovis.getMovieMaxCopiesDvd());
-console.log(await objMovis.getTotalCopiesBluRay());
+// console.log(await objMovis.getTotalCopiesBluRay());
+// console.log(await objMovis.getAllMoviesActor2());
 
 // let objAuthors = new authors();
 // console.log(await objAuthors.getAllActorsAwards());

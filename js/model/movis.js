@@ -282,4 +282,18 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 20. Encontrar todas las películas en las que el actor con id 2 haya participado
+    async getAllMoviesActor2(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            { 
+              $match: {
+                  'character.id_actor': 2
+                }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
