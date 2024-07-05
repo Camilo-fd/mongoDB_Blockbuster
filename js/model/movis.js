@@ -2,22 +2,22 @@ import { ObjectId } from "mongodb";
 import { connect } from "../../helpers/db/connect.js"
 
 
-export class movies extends connect{
+export class movis extends connect{
     static instance;
     db
     constructor() {
         super();
         this.db = this.conexion.db(this.getDbName);
-        if (typeof movies.instance === 'object') {
-            return movies.instance;
+        if (typeof movis.instance === 'object') {
+            return movis.instance;
         }
-        movies.instance = this;
+        movis.instance = this;
         return this;
     }
 
     // 1. Contar el número total de copias de DVD disponibles en todos los registros
     async getCountDvd(){
-        const collection = this.db.collection('movies');
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
                 $unwind: "$format"
@@ -42,7 +42,7 @@ export class movies extends connect{
 
     // 6. Listar todos los géneros de películas distintos
     async getAllDistinctGenre(){
-        const collection = this.db.collection('movies');
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate(  [
             { 
               $unwind: "$genre" 
@@ -68,7 +68,7 @@ export class movies extends connect{
 
     // 7. Encontrar películas donde el actor con id 1 haya participado
     async getAllDistinctGenre(){
-        const collection = this.db.collection('movies');
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
               $unwind: "$character"
@@ -93,7 +93,7 @@ export class movies extends connect{
 
     // 8. Calcular el valor total de todas las copias de DVD disponibles
     async getTotalCopiesDvd(){
-        const collection = this.db.collection('movies');
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
               $unwind: "$format"
@@ -120,8 +120,8 @@ export class movies extends connect{
     }
 
     // 9. Encontrar todas las películas en las que John Doe ha actuado
-    async getAllMoviesJohnDoe(){
-        const collection = this.db.collection('movies');
+    async getAllmovisJohnDoe(){
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
               $unwind: "$character"
@@ -143,8 +143,8 @@ export class movies extends connect{
     }
 
     // 13. Encontrar todas las películas en las que participan actores principales
-    async getAllMoviesActorsPrincipal(){
-        const collection = this.db.collection('movies');
+    async getAllmovisActorsPrincipal(){
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
                 $unwind: "$character"
@@ -160,8 +160,8 @@ export class movies extends connect{
     }
 
     // 14. Encontrar el número total de premios que se han otorgado en todas las películas
-    async getTotalAwardsMovies(){
-        const collection = this.db.collection('movies');
+    async getTotalAwardsmovis(){
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             { $unwind: "$character" },
             {
@@ -191,8 +191,8 @@ export class movies extends connect{
     }
 
     // 15. Encontrar todas las películas en las que John Doe ha actuado y que estén en formato Blu-ray
-    async getAllMoviesJohnDoeBluRay(){
-        const collection = this.db.collection('movies');
+    async getAllmovisJohnDoeBluRay(){
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
               $unwind: "$character"
@@ -213,8 +213,8 @@ export class movies extends connect{
     }
 
     // 16. Encontrar todas las películas de ciencia ficción que tengan al actor con id 3
-    async getAllMoviesScienceFictionIdActor3(){
-        const collection = this.db.collection('movies');
+    async getAllmovisScienceFictionIdActor3(){
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
               $match: {
@@ -230,7 +230,7 @@ export class movies extends connect{
 
     // 17. Encontrar la película con más copias disponibles en formato DVD
     async getMovieMaxCopiesDvd(){
-        const collection = this.db.collection('movies');
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
               $unwind: "$format"
@@ -255,7 +255,7 @@ export class movies extends connect{
 
     // 19. Calcular el valor total de todas las copias de Blu-ray disponibles
     async getTotalCopiesBluRay(){
-        const collection = this.db.collection('movies');
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             {
                 $unwind: "$format"
@@ -284,8 +284,8 @@ export class movies extends connect{
     }
 
     // 20. Encontrar todas las películas en las que el actor con id 2 haya participado
-    async getAllMoviesActor2(){
-        const collection = this.db.collection('movies');
+    async getAllmovisActor2(){
+        const collection = this.db.collection('movis');
         const data = await collection.aggregate([
             { 
               $match: {

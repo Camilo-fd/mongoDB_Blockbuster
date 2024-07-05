@@ -1,7 +1,7 @@
 import { authors } from "./js/model/authors.js";
 import { movies } from "./js/model/movis.js";
 
-// let objMovis = new movies();
+// let objMovis = new movis();
 // console.log(await objMovis.getCountDvd());
 // console.log(await objMovis.getAllDistinctGenre());
 // console.log(await objMovis.getTotalCopiesDvd());
