@@ -11,12 +11,12 @@ export class connect {
     // mongodb+srv://camiloandresfrancoduran:1095791057@atlascluster.awgtpav.mongodb.net/
     constructor({host, user, pass, port,cluster, dbName}=
         {
-            host: "mongodb://", 
-            user: "mongo", 
-            pass: "PNSmQbwecKrbuFTCqXmYoaqicgEZpFeF", 
-            port: 47797, 
-            cluster: "monorail.proxy.rlwy.net", 
-            dbName: "test"
+            host: "mongodb+srv://", 
+            user: "camiloandresfrancoduran", 
+            pass: "1095791057", 
+            port: 27017, 
+            cluster: "atlascluster.awgtpav.mongodb.net/", 
+            dbName: "blockbuster"
         }) {
         if (typeof connect.instance === 'object') {
             return connect.instance;
@@ -49,6 +49,6 @@ export class connect {
         let url = `${this.#host}${this.user}:${this.#pass}@${this.cluster}:${this.port}`;
         this.conexion = new MongoClient(url);
         await this.conexion.connect();
-        console.log("Mensaje de la coexion ");
+        console.log("Mensaje de la conexion ");
     }
 }
