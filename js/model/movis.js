@@ -158,4 +158,35 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 14. Encontrar el número total de premios que se han otorgado en todas las películas
+    async getTotalAwardsMovies(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            { $unwind: "$character" },
+            {
+              $lookup: {
+                from: "autors",
+                localField: "character.id_actor",
+                foreignField: "id_actor",
+                as: "pelicula_actor"
+              }
+            },
+            { $unwind: "$pelicula_actor" },
+            {
+              $set: {
+                premios: { $size: "$pelicula_actor.awards" }
+              }
+            },
+            {
+              $group: {
+                _id: "$_id",
+                nombre: { $first: "$name" },
+                total: { $sum: "$premios" }
+              }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
