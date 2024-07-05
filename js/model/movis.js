@@ -252,4 +252,34 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 19. Calcular el valor total de todas las copias de Blu-ray disponibles
+    async getTotalCopiesBluRay(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            {
+                $unwind: "$format"
+            },
+            {
+                $match: {
+                  "format.name":'Bluray'
+                }
+            },
+            {
+                $set: {
+                  total_valor_copias: {$multiply: ["$format.value","$format.copies"]}
+                }
+            },
+            {
+                $group: {
+                  _id: null,
+                  count: {
+                    $sum: "$total_valor_copias"
+                    }
+                }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }

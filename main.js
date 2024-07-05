@@ -1,7 +1,7 @@
 import { authors } from "./js/model/authors.js";
 import { movies } from "./js/model/movis.js";
 
-// let objMovis = new movies();
+let objMovis = new movies();
 // console.log(await objMovis.getCountDvd());
 // console.log(await objMovis.getAllDistinctGenre());
 // console.log(await objMovis.getTotalCopiesDvd());
@@ -11,8 +11,9 @@ import { movies } from "./js/model/movis.js";
 // console.log(await objMovis.getAllMoviesJohnDoeBluRay());
 // console.log(await objMovis.getAllMoviesScienceFictionIdActor3());
 // console.log(await objMovis.getMovieMaxCopiesDvd());
+console.log(await objMovis.getTotalCopiesBluRay());
 
-let objAuthors = new authors();
+// let objAuthors = new authors();
 // console.log(await objAuthors.getAllActorsAwards());
 // console.log(await objAuthors.getAllCantAwardsActor());
 // console.log(await objAuthors.getAllActors1980());
@@ -20,4 +21,4 @@ let objAuthors = new authors();
 // console.log(await objAuthors.getTotalAutors());
 // console.log(await objAuthors.getAverageAgeActors());
 // console.log(await objAuthors.getAllActorsInstagram());
-console.log(await objAuthors.getAllActorsAwardsAfter2015());
+// console.log(await objAuthors.getAllActorsAwardsAfter2015());
