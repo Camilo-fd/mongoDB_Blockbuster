@@ -7,7 +7,8 @@ let objMovis = new movies();
 // console.log(await objMovis.getTotalCopiesDvd());
 // console.log(await objMovis.getAllMoviesJohnDoe());
 // console.log(await objMovis.getAllMoviesActorsPrincipal());
-console.log(await objMovis.getTotalAwardsMovies());
+// console.log(await objMovis.getTotalAwardsMovies());
+console.log(await objMovis.getAllMoviesJohnDoeBluRay    ());
 
 // let objAuthors = new authors();
 // console.log(await objAuthors.getAllActorsAwards());
