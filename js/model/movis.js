@@ -211,4 +211,20 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 16. Encontrar todas las películas de ciencia ficción que tengan al actor con id 3
+    async getAllMoviesScienceFictionIdActor3(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            {
+              $match: {
+                $and: [
+                  {"character.id_actor": 3}, {"genre": "Ciencia Ficción"}
+                ]
+              }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
