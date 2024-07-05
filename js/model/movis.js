@@ -141,4 +141,21 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 13. Encontrar todas las películas en las que participan actores principales
+    async getAllMoviesActorsPrincipal(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            {
+                $unwind: "$character"
+            },
+            {
+                $match: {
+                "character.rol": "principal"
+                }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
