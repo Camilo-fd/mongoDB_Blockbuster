@@ -50,4 +50,21 @@ export class authors extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 4. Obtener todos los actores nacidos después de 1980
+    async getAllActors1980(){
+        const collection = this.db.collection('autors');
+        const data = await collection.aggregate([
+            {
+              $unwind: "$date_of_birth"
+            },
+            {
+              $match: {
+                "date_of_birth": {$gt: "1980-12-31"}
+              }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
