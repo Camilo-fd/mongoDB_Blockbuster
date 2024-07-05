@@ -227,4 +227,29 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 17. Encontrar la película con más copias disponibles en formato DVD
+    async getMovieMaxCopiesDvd(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            {
+              $unwind: "$format"
+            },
+            {
+              $match: {
+                "format.name": "dvd"
+              }
+            },
+            {
+              $sort: {
+                "format.copies": -1
+              }
+            },
+            {
+              $limit: 1
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
