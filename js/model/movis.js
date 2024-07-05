@@ -90,4 +90,32 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 8. Calcular el valor total de todas las copias de DVD disponibles
+    async getTotalCopiesDvd(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            {
+              $unwind: "$format"
+            },
+            {
+              $match: {
+                "format.name": "dvd"
+              }
+            },
+            {
+              $group: {
+                _id: "$_id",
+                total_value: {
+                  $sum: {
+                    $multiply: ["$format.copies", "$format.value"]
+                  }
+                },
+                copias: {$first: "$format.copies"}
+              }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
