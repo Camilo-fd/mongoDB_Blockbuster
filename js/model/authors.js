@@ -91,7 +91,7 @@ export class authors extends connect{
             }
         ]).toArray();
         await this.conexion.close();
-        return data[0];
+        return data;
     }
 
     // 10. Encontrar el número total de actores en la base de datos
@@ -103,6 +103,31 @@ export class authors extends connect{
             }
         ]).toArray();
         await this.conexion.close();
-        return data[0];
+        return data;
+    }
+
+    // 11. Encontrar la edad promedio de los actores en la base de datos
+    async getAverageAgeActors(){
+        const collection = this.db.collection('autors');
+        const data = await collection.aggregate([
+            {
+              $project: {
+                age: {
+                  $subtract: [
+                    { $year: new Date() },
+                    { $year: { $dateFromString: { dateString: "$date_of_birth" } } }
+                  ]
+                }
+              }
+            },
+            {
+              $group: {
+                _id: null,
+                promedio_edad: { $avg: "$age" }
+              }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
     }
 }
