@@ -65,4 +65,29 @@ export class movies extends connect{
         await this.conexion.close();
         return data;
     }
+
+    // 7. Encontrar películas donde el actor con id 1 haya participado
+    async getAllDistinctGenre(){
+        const collection = this.db.collection('movies');
+        const data = await collection.aggregate([
+            {
+              $unwind: "$character"
+            },
+            {
+              $match: {
+                "character.id_actor": 1
+              }
+            },
+            {
+              $project: {
+                _id: 0,
+                apodo: "$character.apodo",
+                id_actor: "$character.id_actor",
+                pelicula: "$name"
+              }
+            }
+        ]).toArray();
+        await this.conexion.close();
+        return data;
+    }
 }
