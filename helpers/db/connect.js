@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 export class connect {
-    static instance;
+    static instanceConnect;
     user;
     port;
     cluster;
@@ -18,8 +18,8 @@ export class connect {
             cluster: "atlascluster.awgtpav.mongodb.net/", 
             dbName: "blockbuster"
         }) {
-        if (typeof connect.instance === 'object') {
-            return connect.instance;
+        if (typeof connect.instanceConnect === 'object') {
+            return connect.instanceConnect;
         }
         this.setHost = host;
         this.user = user;
@@ -28,7 +28,7 @@ export class connect {
         this.cluster = cluster;
         this.setDbName = dbName;
         this.#open()
-        connect.instance = this;
+        connect.instanceConnect = this;
         return this;
     }
     set setHost(host){
@@ -44,11 +44,10 @@ export class connect {
         return this.#dbName;
     }
     async #open(){
-        console.log("Entre");
+        // console.log("Entre");
         // mongodb://mongo:PNSmQbwecKrbuFTCqXmYoaqicgEZpFeF@monorail.proxy.rlwy.net:47797/
         let url = `${this.#host}${this.user}:${this.#pass}@${this.cluster}:${this.port}`;
         this.conexion = new MongoClient(url);
-        await this.conexion.connect();
-        console.log("Mensaje de la conexion ");
+        // console.log("Mensaje de la conexion ");
     }
 }

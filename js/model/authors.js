@@ -3,20 +3,26 @@ import { connect } from "../../helpers/db/connect.js"
 
 
 export class authors extends connect{
-    static instance;
+    static instanceauthors;
     db
     constructor() {
         super();
         this.db = this.conexion.db(this.getDbName);
-        if (typeof authors.instance === 'object') {
-            return authors.instance;
+        if (typeof authors.instanceauthors === 'object') {
+            return authors.instanceauthors;
         }
-        authors.instance = this;
+        authors.instanceauthors = this;
         return this;
+    }
+
+    destructor() {
+        authors.instanceauthors = undefined
+        connect.instanceConnect = undefined
     }
 
     // 2. Encontrar todos los actores que han ganado premios Oscar
     async getAllActorsAwards(){
+        await this.conexion.connect();
         const collection = this.db.collection('authors');
         const data = await collection.aggregate([
             {
@@ -34,6 +40,7 @@ export class authors extends connect{
 
     // 3. Encontrar la cantidad total de premios que ha ganado cada actor
     async getAllCantAwardsActor(){
+        await this.conexion.connect();
         const collection = this.db.collection('authors');
         const data = await collection.aggregate([
             { 
@@ -53,6 +60,7 @@ export class authors extends connect{
 
     // 4. Obtener todos los actores nacidos después de 1980
     async getAllActors1980(){
+        await this.conexion.connect();
         const collection = this.db.collection('authors');
         const data = await collection.aggregate([
             {
@@ -70,6 +78,7 @@ export class authors extends connect{
 
     // 5. Encontrar el actor con más premios
     async getActorWithMostAwards(){
+        await this.conexion.connect();
         const collection = this.db.collection('authors');
         const data = await collection.aggregate([
             { 
@@ -96,6 +105,7 @@ export class authors extends connect{
 
     // 10. Encontrar el número total de actores en la base de datos
     async getTotalauthors(){
+        await this.conexion.connect();
         const collection = this.db.collection('authors');
         const data = await collection.aggregate([
             {
@@ -108,6 +118,7 @@ export class authors extends connect{
 
     // 11. Encontrar la edad promedio de los actores en la base de datos
     async getAverageAgeActors(){
+        await this.conexion.connect();
         const collection = this.db.collection('authors');
         const data = await collection.aggregate([
             {
@@ -133,6 +144,7 @@ export class authors extends connect{
 
     // 12. Encontrar todos los actores que tienen una cuenta de Instagram
     async getAllActorsInstagram(){
+        await this.conexion.connect();
         const collection = this.db.collection('authors');
         const data = await collection.aggregate([
             {
@@ -147,6 +159,7 @@ export class authors extends connect{
 
     // 18. Encontrar todos los actores que han ganado premios después de 2015
     async getAllActorsAwardsAfter2015(){
+        await this.conexion.connect();
         const collection = this.db.collection('authors');
         const data = await collection.aggregate([
             {
